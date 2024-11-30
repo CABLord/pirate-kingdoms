@@ -1,0 +1,6 @@
+
+> pirate-kingdoms@1.0.0 start
+> node server.js
+
+No saved game state found, starting new game
+Server is running on port 3000
