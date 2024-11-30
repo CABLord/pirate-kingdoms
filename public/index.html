@@ -1,26 +1,85 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pirate Kingdoms</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #000;
-        }
-    </style>
+    <title>Naval Trading Game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="game-container"></div>
-    <script src="js/game.js"></script>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui-overlay">
+            <div id="player-stats">
+                <h3>Ship Status</h3>
+                <div id="gold">Gold: <span id="gold-amount">0</span></div>
+                <div id="speed">Speed: <span id="speed-value">0</span></div>
+                <div id="strength">Strength: <span id="strength-value">0</span></div>
+            </div>
+
+            <div id="leaderboard-container">
+                <h3>Top Pirates</h3>
+                <div id="leaderboard"></div>
+            </div>
+
+            <div id="quest-container">
+                <h3>Current Quest</h3>
+                <div id="active-quest"></div>
+            </div>
+
+            <div id="chat-container">
+                <div id="chat-messages"></div>
+                <div id="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Type your message...">
+                    <button id="chat-send">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ship Selection Modal -->
+    <div id="ship-select-modal" class="modal">
+        <div class="modal-content">
+            <h2>Choose Your Ship</h2>
+            <div class="ship-options">
+                <div class="ship-option" data-ship="merchant">
+                    <h3>Merchant Ship</h3>
+                    <p>Balanced stats, great for beginners</p>
+                    <ul>
+                        <li>Speed: 140</li>
+                        <li>Strength: 8</li>
+                        <li>Capacity: 200</li>
+                        <li>Cost: Free</li>
+                    </ul>
+                </div>
+                <div class="ship-option" data-ship="warship">
+                    <h3>Warship</h3>
+                    <p>High combat power</p>
+                    <ul>
+                        <li>Speed: 180</li>
+                        <li>Strength: 15</li>
+                        <li>Capacity: 100</li>
+                        <li>Cost: 200 gold</li>
+                    </ul>
+                </div>
+                <!-- Add other ship options -->
+            </div>
+            <button id="start-game">Set Sail!</button>
+        </div>
+    </div>
+
+    <!-- Trade Modal -->
+    <div id="trade-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Trade Proposal</h2>
+            <div id="trade-details"></div>
+            <div class="trade-buttons">
+                <button id="accept-trade">Accept</button>
+                <button id="reject-trade">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
